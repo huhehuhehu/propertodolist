@@ -12,4 +12,6 @@ class QuicknoteRepository {
 
   Future deleteQuicknote(int id) => qDao.deleteQuicknote(id);
 
+  Future updateDone(Quicknote q) => qDao.updateDone(q);
+
 }

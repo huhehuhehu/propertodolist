@@ -20,6 +20,9 @@ List<BottomNavigationBarItem> tabItem = [
   ),
 ];
 
-final String tableName = "quick_notes";
+final String tableName = "quick_note";
 final String Column_id = "id";
 final String Column_name = "content";
+final String Column_done = "is_done";
+
+final double fSize = 24.0;

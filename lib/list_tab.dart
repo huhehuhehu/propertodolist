@@ -32,6 +32,7 @@ class ListTab extends StatelessWidget{
         if(snapshot.hasData == false) return Center(child: Text('BLAH'),);
         return snapshot.data.length >= 1 ?
         ListView.builder(
+          scrollDirection: Axis.vertical,
           itemCount: snapshot.data.length,
           itemBuilder: (context, index){
             Quicknote q = snapshot.data[index];
@@ -69,8 +70,28 @@ class ListTab extends StatelessWidget{
                   quicknoteBloc.deleteQuicknote(q.id);
                 };
               },
-              child: ListTile(
-                title: Text(snapshot.data[index].getTitle()),
+              child: Card(
+                margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+                child: ListTile(
+                  title: Text(q.getTitle(),
+                    style: TextStyle(
+                    fontSize: fSize,
+                    ),
+                  ),
+                  leading: IconButton(
+                      icon:q.isDone == 0 ? Icon(Icons.check_box_outline_blank) : Icon(Icons.check_box),
+                    onPressed: () {
+                      q.swapDone();
+                      quicknoteBloc.updateDone(q);
+                    },
+                      iconSize: fSize,
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: null,
+                    iconSize: fSize,
+                  ),
+                ),
               ),
             );
           },

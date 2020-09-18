@@ -33,6 +33,11 @@ class QuicknoteBloc {
     getQuicknotes();
   }
 
+  updateDone(Quicknote q) async{
+    await _quicknoteRepository.updateDone(q);
+    getQuicknotes();
+  }
+
   dispose(){
     _quicknoteController.close();
   }

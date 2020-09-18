@@ -23,7 +23,7 @@ class QuicknotesDao{
     if(data.length == 0) return q;
 
     for(int i = 0; i < data.length; i++) {
-      q.add(Quicknote(content: data[i][Column_name], id: data[i][Column_id]));
+      q.add(Quicknote(content: data[i][Column_name], id: data[i][Column_id], isDone: data[i][Column_done]));
     }
     return q;
   }
@@ -39,6 +39,13 @@ class QuicknotesDao{
     final db = await dbProvider.database;
     var res = await db.update(tableName, Quicknote(content: s, id: index).toMap(),
         where: "id = ?", whereArgs: [index]);
+    return res;
+  }
+
+  Future<void> updateDone(Quicknote q) async{
+    final db = await dbProvider.database;
+    var res = await db.update(tableName, q.toMap(),
+        where: "id = ?", whereArgs: [q.id]);
     return res;
   }
 }
