@@ -14,7 +14,9 @@ class editor extends StatelessWidget{
   static final textController = TextEditingController();
 
   TextField tf = TextField(
-    maxLines: 99999,
+    maxLines: 1,
+    maxLength: 64,
+    textAlign: TextAlign.center,
     autofocus: true,
     controller: textController,
   );
@@ -25,10 +27,12 @@ class editor extends StatelessWidget{
     return WillPopScope(
       onWillPop: () async {
         textController.clear();
+        textController.dispose();
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: mainColor,
           title:Text("Quicknote Editor"),
           actions: [
             IconButton(
@@ -44,7 +48,7 @@ class editor extends StatelessWidget{
         body: Container(
           color: Colors.black12,
           height: double.infinity,
-          child: tf,
+          child: Center(child: tf),
         ),
         resizeToAvoidBottomPadding: true,
       ),
